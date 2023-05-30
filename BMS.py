@@ -2,10 +2,12 @@ import re
 from typing import Dict
 import pickle
 import os
-import numpy as np
 
 
 class BMS:
+    """
+    BMS文件解析类
+    """
 
     Bpm = 120
     tick_rate: int
@@ -21,9 +23,11 @@ class BMS:
         # 读取bms文件，获取title，artist，bpm等信息
         self.file_name = os.path.basename(fp).split('.')[0]
         if self.__check_cache():
+            # 读取缓存
             obj = BMS.__read4file(self.file_name)
             self.__dict__.update(obj.__dict__)
         else:
+            # 读取bms文件
             try:
                 with open(fp, 'r', encoding='utf-8') as bms_file:
                     l = bms_file.read()
@@ -35,18 +39,17 @@ class BMS:
                     exit()
             self.key_type = type
             self.track = []
+            # 解析bms文件
             self.__tran(l)
+            # 保存缓存
             self.__save2file()
-
-    def __tran_info(self, raw: str, key: str):
-        reg = f"#{key} (.*)"
-        self.info[key] = re.findall(reg, raw)[0]
 
     def __tran(self, raw: str):
 
         # 获取title等info
         for key in self.info.keys():
-            self.__tran_info(raw, key)
+            reg = f"#{key} (.*)"
+            self.info[key] = re.findall(reg, raw)[0]
 
         self.Bpm = int(self.info['BPM'])
 

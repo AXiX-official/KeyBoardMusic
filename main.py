@@ -8,7 +8,7 @@ b = BMSPlayer(r'E:\Unknow\BMS\energy trixxx_wav\another.bms', r'E:\Unknow\BMS\en
 a = b.zip_track
 
 
-def muti_play(l: list):
+def multi_play(l: list):
     if not l:
         return
     n = len(l)
@@ -22,8 +22,8 @@ def muti_play(l: list):
 
 
 def on_press(key):
-    global p,a
-    muti_play(a[p][0])
+    global p, a
+    multi_play(a[p][0])
     p += 1
 
 

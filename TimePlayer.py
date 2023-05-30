@@ -99,12 +99,12 @@ class BMSPlayer:
             l = next(self.p)
             self.__play(self.__check)
             if l:
-                self.__muti_play(l)
+                self.__multi_play(l)
                 # _play_with_simpleaudio(l)
         except StopIteration:
             self.t.cancel()
 
-    def __muti_play(self, l: list):
+    def __multi_play(self, l: list):
         if not l:
             return
         func = {'wav': AudioSegment.from_wav, 'ogg': AudioSegment.from_ogg}
@@ -126,7 +126,7 @@ class BMSPlayer:
             l = next(self.p)
             self.__play(self.__zip_check, n=l[1])
             if l:
-                self.__muti_play(l[0])
+                self.__multi_play(l[0])
         except StopIteration:
             self.t.cancel()
 
