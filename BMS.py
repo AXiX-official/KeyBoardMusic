@@ -9,23 +9,24 @@ class BMS:
     BMS文件解析类
     """
 
-    Bpm = 120
-    tick_rate: int
-    info = dict.fromkeys(('TITLE', 'ARTIST', 'BPM', 'PLAYLEVEL', 'RANK'), )
-    key_type = 'wav'
-    key_dict:dict
-    track:list
-    max_para = 0
-    m_l = 0
-    file_name: str
+    __slots__ = ('Bpm', 'info', 'key_type', 'key_dict', 'track', 'max_para', 'm_l', 'file_name')
 
     def __init__(self, fp, type='wav'):
         # 读取bms文件，获取title，artist，bpm等信息
+        self.Bpm = 120
+        self.info = dict.fromkeys(('TITLE', 'ARTIST', 'BPM', 'PLAYLEVEL', 'RANK'), )
+        self.key_type = 'wav'
+        self.key_dict: dict
+        self.track: list
+        self.max_para = 0
+        self.m_l = 0
+
         self.file_name = os.path.basename(fp).split('.')[0]
         if self.__check_cache():
             # 读取缓存
             obj = BMS.__read4file(self.file_name)
-            self.__dict__.update(obj.__dict__)
+            for key in self.__slots__:
+                setattr(self, key, getattr(obj, key))
         else:
             # 读取bms文件
             try:

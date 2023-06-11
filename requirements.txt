@@ -7,3 +7,5 @@ timeloop~=1.0.2
 numexpr~=2.8.4
 numba~=0.56.4
 httpx~=0.13.3
+Kivy~=2.1.0
+scipy~=1.10.0

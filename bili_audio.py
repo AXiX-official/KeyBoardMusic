@@ -5,7 +5,7 @@ import os
 
 credential = None
 
-os.environ["PATH"] += os.pathsep + os.path.abspath(r"ffmpeg-4.4-full_build\\bin\\ffmpeg.exe")
+# os.environ["PATH"] += os.pathsep + os.path.abspath(r"ffmpeg-4.4-full_build\\bin\\ffmpeg.exe")
 
 
 async def download_url(url: str, out: str, info: str):

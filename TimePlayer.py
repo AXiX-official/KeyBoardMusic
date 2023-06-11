@@ -27,15 +27,18 @@ def get_l(fp, sample_rate=44100):
 
 
 class BMSPlayer:
-    track: list
-    zip_track: list
-    tl = Timeloop()
-    flag = True
-    mspt: float
-    t = None
-    s_type: str
+    __slots__ = ['track', 'zip_track', 'tl', 'flag', 'mspt', 't', 's_type']
 
     def __init__(self, bms_fp, key_fp, type='wav', cache=True, new=False):
+
+        self.track: list
+        self.zip_track: list
+        self.tl = Timeloop()
+        self.flag = True
+        self.mspt: float
+        self.t = None
+        self.s_type: str
+
         fn = os.path.basename(bms_fp).split('.')[0]
         if self.__check_cache(fn):
             obj = BMSPlayer.load(fn)
